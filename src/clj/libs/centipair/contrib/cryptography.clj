@@ -41,3 +41,8 @@
 
 (defn generate-session-id []
   (random-base64 32))
+
+
+(defn generate-key
+  [length]
+  (random-base64 length))
