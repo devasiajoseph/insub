@@ -1,0 +1,7 @@
+{:production true
+ :port 3000
+ ;;Add production 
+ :db {:sql {:host ""
+            :db ""
+            :user ""
+            :password ""}}}

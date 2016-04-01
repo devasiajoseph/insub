@@ -1,0 +1,146 @@
+.hide{
+    display:none;
+}
+
+.show{
+    display:block;
+}
+.clickable{
+    cursor:pointer;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.data-row{
+    cursor:pointer;
+}
+
+.notify {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    margin-left: -150px;
+    z-index: 9999;
+    text-align:center;
+    font-weight:bold;
+    top:8px;
+    padding:3px 0px 3px 0px;
+    
+}
+
+.notify-loading{
+    width: 150px;
+    background-color: #f9edbe;
+    border-color: #f0c36d;
+}
+
+.notify-error{
+    width: 300px;
+    background-color: #E74C3C;
+    border-color: #E74C3C;
+}
+
+body{
+    background-color: #000;
+    font-size:16px;
+}
+
+.panel {
+    background-color:white;
+    padding:5px;
+    border-radius: 3px;
+}
+.layout {
+    margin: 0 auto;
+    max-width: 720px;
+    margin-bottom: 50px;
+    line-height: 1.6em;
+}
+
+.box-name {
+    width:100%;
+    padding-left:5px;
+}
+
+.box-content {
+    width:100%;
+    margin-top:5px;
+    color:#333;
+}
+
+.box-image{border-radius: 3px;}
+
+.box-name a{font-weight:bold;}
+
+a {
+    color: #2378C8;
+    cursor: pointer;
+    text-decoration: none;}
+.post {
+    border: 1px solid #e1e8ed;
+    border-radius: 3px;
+    padding:9px;
+    margin:9px;
+    background-color:white;
+}
+
+
+.home-menu ul{float:right;}
+
+
+.home-menu {
+    background: #2378C8;
+}
+
+.home-menu a {color: white;}
+
+
+.home-menu li a:hover,
+.home-menu li a:focus {
+    background: none;
+    border: none;
+    color: #AECFE5;
+}
+
+.pure-menu-heading {
+    font-weight: 400;
+    font-size: 120%;
+}
+
+
+.form-error{ color:red;}
+
+.input-message{
+    padding-left:11em;
+}
+
+.pure-form input[type="text"],
+.pure-form input[type="password"],
+.pure-form input[type="email"],
+.pure-form input[type="url"],
+.pure-form input[type="date"],
+.pure-form input[type="month"],
+.pure-form input[type="time"],
+.pure-form input[type="datetime"],
+.pure-form input[type="datetime-local"],
+.pure-form input[type="week"],
+.pure-form input[type="number"],
+.pure-form input[type="search"],
+.pure-form input[type="tel"],
+.pure-form input[type="color"],
+.pure-form select,
+.pure-form textarea {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    border-radius: 0px;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width:320px;
+}

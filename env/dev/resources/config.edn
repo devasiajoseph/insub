@@ -1,0 +1,16 @@
+{:dev true
+ :port 3000
+ ;; when :nrepl-port is set the application starts the nREPL server on load
+ :nrepl-port 7001
+ :site-settings  {:name "centipair"
+                  :email "info@centipair.com"
+                  :site_link "http://www.centipair.com"
+                  :site_name "Centipair"
+                  :site_email "info@centipair.com"}
+ :email {:host "smtphost.server.com"
+         :user "username"
+         :pass "password"
+         :port 123}
+ :db {:sql {:db "metapoller"
+            :user "centipair"
+            :password "c3nt1p@1r"}}}

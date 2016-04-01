@@ -1,0 +1,9 @@
+#!/bin/bash
+# Build script
+
+lein clean
+lein immutant war
+
+rm ~/installs/wildfly/standalone/deployments/*
+cp target/accrue.war ~/installs/wildfly/standalone/deployments/
+sh ~/installs/wildfly/bin/standalone.sh
