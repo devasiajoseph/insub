@@ -59,3 +59,8 @@
   "converts date time to sql format"
   [date-time]
   (clj-time-coerce/to-sql-time date-time))
+
+
+(defn unix-timestamp-now
+  []
+  (clj-time-coerce/to-long (clj-time-local/local-now)))

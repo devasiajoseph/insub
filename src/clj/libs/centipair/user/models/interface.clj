@@ -1,30 +1,21 @@
-(ns libs.cap.user.models
-  (:require [libs.centipair.contrib.cryptography :as cry]
-            [validateur.validation :refer :all]
-            [libs.centipair.utilities.validators :as v]))
+(ns libs.centipair.user.models.interface
+  (:require [libs.centipair.user.models.cassandra :as user-models]
+            [libs.centipair.async.channels :as channels]))
 
-
-(def user-account-table "user_account")
-(def user-login-username-table "user_login_username")
-(def user-login-email-table "user_login_email")
-(def user-session-table "user_session")
-(def user-session-index-table "user_session_index")
-(def user-account-registration-table "user_account_registration")
-(def user-profile-table "user_profile")
-(def password-reset-table "password_reset")
 
 
 (defn get-user-username
-  [username])
+  [username]
+  (first (user-models/get-user-username)))
 
 
 (defn get-user-email
-  [email])
+  [email]
+  (first (user-models/get-user-email)))
 
 
 (defn get-user-session
-  [session-key]
-  )
+  [session-key])
 
 
 (defn get-user
@@ -35,11 +26,17 @@
     "session" (get-user-session value)))
 
 
-(defn email-exist-check
-  [email])
+(defn unique-email?
+  [email]
+  (if (nil? (get-user-email email))
+    true
+    false))
 
-(defn username-exist-check
-  [username])
+(defn unique-username?
+  [username]
+  (if (nil? (get-user-username username))
+    true
+    false))
 
 ;;Registration workflow
 
@@ -48,8 +45,8 @@
    (presence-of :email :message "Your email address is required for registration")
    (presence-of :username :message "Please select a username for your profile")
    (presence-of :password :message "Please choose a password")
-   (validate-by :email email-exist-check :message "This email already exists")
-   (validate-by :username username-exist-check :message "This username already exists")))
+   (validate-by :email unique-email? :message "This email already exists")
+   (validate-by :username unique-username? :message "This username already exists")))
 
 
 (defn validate-user-registration
@@ -62,24 +59,21 @@
 
 
 (defn activate-user
-  [params])
+  [params]
+  (user-models/activate-user params))
 
-
-(defn create-user
-  [params])
 
 
 (defn create-registration-request
-  [params])
+  [params]
+  (user-models/create-registration-request params))
 
-
-(defn validate-user-registration
-  [params])
 
 (defn register-user
   [params]
-  
-  )
+  (let [user-account (user-models/create-user-account params)]
+    
+    ))
 
 
 ;;Registration workflow ends

@@ -18,3 +18,15 @@
 
 ;;(defdb db (postgres {:db "accrue" :user "devasia" :password ""}))
 
+(defn get-db-connection
+  []
+  (cc/connect (get-in env [:db :cassandra :cluster])
+              {:keyspace (get-in env [:db :cassandra :keyspace])}))
+
+(defstate cassandra-conn :start (get-db-connection))
+
+
+(defn dbcon
+  "Use this function as connection in cassandra related functions"
+  []
+  cassandra-conn)
