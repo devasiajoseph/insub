@@ -10,6 +10,7 @@
 (def user-account "user_account")
 (def user-username "user_username")
 (def user-email "user_email")
+(def email-verification "email_verification")
 (def user-session "user_session")
 (def user-session-index"user_session_index")
 (def user-account-registration-table "user_account_registration")
@@ -53,8 +54,6 @@
 ;;Registration workflow
 
 
-
-
 (defn activate-user
   [params])
 
@@ -73,10 +72,12 @@
       (cql/insert (dbcon) user-account ua-params))
     ua-params))
 
+
 (defn add-username
   [params]
   (cql/insert (dbcon) user-username {:username (:username params)
                                      :user_account_id (:user_account_id params)}))
+
 
 (defn add-email
   [params]
@@ -86,8 +87,9 @@
 
 (defn create-registration-request
   [params]
-  
-  )
+  (cql/insert (dbcon) email-verification {:verification_key (crypto/generate-key 16)
+                                          :user_account_id (:user_account_id params)
+                                          :verified false}))
 
 
 
