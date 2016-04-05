@@ -5,6 +5,7 @@
             [libs.centipair.contrib.cryptography :as crypto]
             [libs.centipair.contrib.time :as time]
             [libs.centipair.async.channels :as channels]
+            [libs.centipair.contrib.cookies :as cookies]
             ))
 
 
@@ -19,20 +20,41 @@
 (def password-reset-table "password_reset")
 
 
-(defn get-user-username
+(defn get-user-id
+  "user account id must be of type uuid"
+  [user-account-id]
+  (first (cql/select (dbcon) user-account (cql/where [[= :user_account_id user-account-id]]))))
+
+(defn get-username
   [username]
   (first (cql/select (dbcon) user-username (cql/where [[= :username username]]))))
 
 
-(defn get-user-email
+
+(defn get-email
   [email]
   (first (cql/select (dbcon) user-email (cql/where [[= :email email]]))))
 
 
 (defn get-user-session
   [session-key]
-
+  
   )
+
+
+(defn get-user-username
+  [username]
+  (let [u-username (get-username username)
+        user-account (get-user-id (:user_account_id u-username))]
+    user-account))
+
+
+(defn get-user-email
+  [email]
+  (let [u-email (get-email email)
+        user-account (get-user-id (:user_account_id u-email))]
+    user-account))
+
 
 
 (defn get-user
@@ -43,16 +65,23 @@
     "session" (get-user-session value)))
 
 
+(defn get-authenticated-user
+  [request]
+  (let [auth-token (cookies/get-auth-token request)]
+    
+    ))
+
+
 (defn email-exist?
   [email]
-  (if (nil? (get-user-email email))
+  (if (nil? (get-email email))
     false
     true))
 
 
 (defn username-exist?
   [username]
-  (if (nil? (get-user-username username))
+  (if (nil? (get-username username))
     false
     true))
 
@@ -139,4 +168,6 @@
 
 (defn delete-user-account
   "provide email to delete a user account"
-  [email])
+  [email]
+  
+  )
