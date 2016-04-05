@@ -4,6 +4,7 @@
             [clojurewerkz.cassaforte.uuids :as c-uuid]
             [libs.centipair.contrib.cryptography :as crypto]
             [libs.centipair.contrib.time :as time]
+            [libs.centipair.async.channels :as channels]
             ))
 
 
@@ -20,12 +21,12 @@
 
 (defn get-user-username
   [username]
-  (cql/select (dbcon) user-username (cql/where [[= :username username]])))
+  (first (cql/select (dbcon) user-username (cql/where [[= :username username]]))))
 
 
 (defn get-user-email
   [email]
-  (cql/select (dbcon) user-email (cql/where [[= :email email]])))
+  (first (cql/select (dbcon) user-email (cql/where [[= :email email]]))))
 
 
 (defn get-user-session
@@ -47,6 +48,17 @@
   (if (nil? (get-user-email email))
     false
     true))
+
+
+(defn username-exist?
+  [username]
+  (if (nil? (get-user-username username))
+    false
+    true))
+
+(defn user-exist?
+  [params]
+  (or (email-exist? (:email params)) (username-exist? (:username params))))
 
 (defn username-exist-check
   [username])
@@ -86,20 +98,27 @@
 
 
 (defn create-registration-request
-  [params]
-  (cql/insert (dbcon) email-verification {:verification_key (crypto/generate-key 16)
-                                          :user_account_id (:user_account_id params)
-                                          :verified false}))
+  [new-account]
+  (let [vr-params {:verification_key (crypto/generate-key 16)
+                   :user_account_id (:user_account_id new-account)
+                   :verified false}]
+    (do (cql/insert (dbcon) email-verification vr-params))
+    vr-params))
 
 
 
 
 (defn register-user
   [params]
-  (let [new-account (create-user-account params)]
-    (do (add-username new-account)
-        (add-email new-account)
-        (create-registration-request new-account))))
+  (if (user-exist? params)
+    (println "user already exists. skipping")
+    (let [new-account (create-user-account params)
+        vr-params (create-registration-request new-account)]
+      (do (add-username new-account)
+          (add-email new-account)
+          (channels/send-async-mail {:purpose "registration"
+                                     :params {:email (:email params)
+                                              :registration_key (:verification_key vr-params)}})))))
 
 
 ;;Registration workflow ends
@@ -116,3 +135,8 @@
 (defn reset-password
   [params])
 
+
+
+(defn delete-user-account
+  "provide email to delete a user account"
+  [email])

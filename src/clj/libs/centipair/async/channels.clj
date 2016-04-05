@@ -3,6 +3,7 @@
              :as a
              :refer [>! <! >!! <!! go chan buffer close! thread
                      alts! alts!! timeout]]
+            [mount.core :refer [defstate]]
             [libs.centipair.contrib.mail :as mail]))
 
 
@@ -31,3 +32,5 @@
   (do 
     (init-mail-channel)))
 
+
+(defstate async-channels :start (init-core-channels))

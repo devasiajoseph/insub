@@ -2,8 +2,7 @@
   (:use postal.core
         selmer.parser)
   (:require [clojure.tools.logging :as log]
-            [centipair.config :refer [env]]
-            ))
+            [centipair.config :refer [env]]))
 
 (defn send-registration-email [registration-request]
   (log/info "Sending registration email")
@@ -39,7 +38,9 @@
                  :body (str "test email number -" (:body mail) )}))
 
 
-(defn send-mail [mail]
+(defn send-mail
+  "Format : {:purpose registration :}"
+  [mail]
   (log/info "Sending mail")
   (case (:purpose mail)
     "registration" (send-registration-email (:params mail))
