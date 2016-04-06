@@ -1,0 +1,52 @@
+
+
+* Main UI
+
+** DONE Create main style
+
+** Create 
+
+** TODO create UI states for navigation bar and menu
+
+*** TODO Show login and signup if not logged in
+Show login page if not logge din 
+
+*** TODO show default universal feed if not logged in
+
+
+* User registration
+
+** DONE Create cassandra user model functions
+
+** DONE Create user model interfaces
+
+** DONE Create UI for registration page
+
+** DONE Integrate mail notification for registration
+
+** TODO Show registration success UI
+   DEADLINE: <2016-04-07 Thu>
+
+** TODO Activate user via clicking mail link
+   DEADLINE: <2016-04-07 Thu>
+
+* User login
+
+** DONE Create UI for login page
+
+** TODO create user login cassandra functions
+   DEADLINE: <2016-04-07 Thu>
+
+** TODO create logout function
+   DEADLINE: <2016-04-07 Thu>
+
+* User boxes
+
+** TODO Create box
+
+*** Fields
+
+**** Box name
+
+**** Box description
+

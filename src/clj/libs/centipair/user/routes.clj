@@ -8,3 +8,13 @@
 (defn logout [request]
   (user-model/logout request)
   (redirect "/"))
+
+
+(defn activate-user
+  [key]
+  (let [activation-result (user-model/activate-user key)]
+    (if (:result activation-result)
+      "Activated"
+      "Something wrong"
+      )
+    ))

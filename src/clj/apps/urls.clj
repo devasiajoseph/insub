@@ -5,4 +5,5 @@
 ;;Import urls from your apps here
 
 (defroutes app-urls
-  (GET "/" [] (my-views/home-page)))
+  (GET "/" [] (my-views/home-page))
+  (GET "/post" [] (my-views/post-page)))

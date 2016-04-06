@@ -79,6 +79,7 @@
     (validation-error required-field-error)))
 
 (defn agree-terms [field]
+  (js/console.log (= (:checked field) "checked"))
   (if (= (:checked field) "checked")
     (validation-success)
     (validation-error "You have to agree to the terms and conditions")))

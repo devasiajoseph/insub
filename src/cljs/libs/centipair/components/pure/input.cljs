@@ -75,7 +75,7 @@
    [:input {:type (:type @field) :id (:id @field)
              :value (:value @field)
              :on-change #(do
-                           (update-value field (-> % .-target .-checked))
+                           (update-check field (-> % .-target .-checked))
                            (if (not (nil? (:on-change @field))) ((:on-change @field) field)))
              :checked (:checked @field)
              :key (str "key-" (:id @field))

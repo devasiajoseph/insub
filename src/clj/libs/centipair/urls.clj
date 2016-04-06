@@ -6,11 +6,12 @@
 
 
 (defroutes centipair-urls
-  (GET "/dashboard" [] (c-views/dashboard))
+  ;;(GET "/dashboard" [] (c-views/dashboard))
+  (GET "/user/activate/:key" [key] (user-routes/activate-user key))
   (GET "/logout" request (user-routes/logout request))
-  (ANY "/api/centipair/admin/user" [] (user-api/admin-api-user))
-  (ANY "/api/centipair/admin/user/search" [] (user-api/admin-api-user-search))
-  (ANY "/api/centipair/admin/user/:id" [id] (user-api/admin-api-user id))
+  ;;(ANY "/api/centipair/admin/user" [] (user-api/admin-api-user))
+  ;;(ANY "/api/centipair/admin/user/search" [] (user-api/admin-api-user-search))
+  ;;(ANY "/api/centipair/admin/user/:id" [id] (user-api/admin-api-user id))
   (GET "/api/centipair/user/status" [] (user-api/api-user-status))
   (POST "/api/centipair/register" [] (user-api/api-user-register))
   (POST "/api/centipair/login" [] (user-api/api-user-login)))

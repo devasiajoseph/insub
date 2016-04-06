@@ -286,7 +286,7 @@
       (if (not (nil? (key errors)))
         (swap! field assoc
                :message (parse-error-message key errors)
-               :class-name style/bootstrap-input-container-class-error)))))
+               :class-name style/input-container-class-error)))))
 
 
 (defn valid-form?

@@ -42,6 +42,11 @@
   (user-models/register-user params))
 
 
+(defn activate-user
+  [activation-key]
+  (user-models/activate-user activation-key))
+
+
 ;;Registration workflow ends
 
 

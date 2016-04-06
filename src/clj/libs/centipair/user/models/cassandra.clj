@@ -99,7 +99,9 @@
 
 
 (defn activate-user
-  [params])
+  [activation-key]
+  
+  )
 
 
 (defn create-user-account

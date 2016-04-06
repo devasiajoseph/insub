@@ -41,7 +41,7 @@
       var csrfToken = "{{csrf-token}}";
     </script>
     {% script "/cljs/app.js" %}
-    <input type="hidden" name="_csrf" value="{{csrf-token}}">
+     <input type="hidden" value="{{csrf-token}}" id="__anti-forgery-token"/>
 
    
   </body>

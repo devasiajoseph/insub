@@ -21,3 +21,4 @@ deps-tree
 .DS_Store
 build.sh
 deploy.sh
+config.edn
