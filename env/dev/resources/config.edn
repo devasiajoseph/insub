@@ -6,11 +6,12 @@
                   :email "info@wemebox.com"
                   :site_link "http://www.wemebox.com"
                   :site_name "Wemebox"
-                  :site_email "info@wemebox.com"}
- :email {:host "smtphost.server.com"
-         :user "username"
-         :pass "password"
-         :port 123}
+                  :site_email "info@wemebox.com"
+                  :site_domain "wemebox.com"}
+ :email {:host "smttp.mai.com"
+         :user "user"
+         :pass "pass"
+         :port 25}
  :db {:sql {:db "wemebox"
             :user "devasia"
             :password "devasia"}

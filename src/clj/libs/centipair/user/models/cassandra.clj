@@ -6,6 +6,7 @@
             [libs.centipair.contrib.time :as time]
             [libs.centipair.async.channels :as channels]
             [libs.centipair.contrib.cookies :as cookies]
+            [clojure.tools.logging :as log]
             ))
 
 
@@ -44,16 +45,18 @@
 
 (defn get-user-username
   [username]
-  (let [u-username (get-username username)
-        user-account (get-user-id (:user_account_id u-username))]
-    user-account))
+  (let [u-username (get-username username)]
+    (if (not (nil? u-username))
+      (get-user-id (:user_account_id u-username))
+      nil)))
 
 
 (defn get-user-email
   [email]
-  (let [u-email (get-email email)
-        user-account (get-user-id (:user_account_id u-email))]
-    user-account))
+  (let [u-email (get-email email)]
+    (if (not (nil? u-email))
+      (get-user-id (:user_account_id u-email))
+      nil)))
 
 
 
@@ -140,7 +143,7 @@
 (defn register-user
   [params]
   (if (user-exist? params)
-    (println "user already exists. skipping")
+    (log/warn "User already exists..Skipping")
     (let [new-account (create-user-account params)
         vr-params (create-registration-request new-account)]
       (do (add-username new-account)
@@ -169,5 +172,10 @@
 (defn delete-user-account
   "provide email to delete a user account"
   [email]
-  
-  )
+  (let [uac (get-user-email email)]
+    (if (not (nil? uac))
+      (do 
+        (cql/delete (dbcon) user-email (cql/where [[= :email email]]))
+        (cql/delete (dbcon) user-username (cql/where [[= :username (:username uac)]]))
+        (cql/delete (dbcon) user-account (cql/where [[= :user_account_id (:user_account_id uac)]]))))
+    uac))

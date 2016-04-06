@@ -1,40 +1,19 @@
 (ns libs.centipair.user.models.interface
-  (:require [libs.centipair.user.models.cassandra :as user-models]
+  (:require [validateur.validation :refer :all]
+            [libs.centipair.user.models.cassandra :as user-models]
             [libs.centipair.async.channels :as channels]))
 
 
 
-(defn get-user-username
-  [username]
-  (first (user-models/get-user-username)))
-
-
-(defn get-user-email
-  [email]
-  (first (user-models/get-user-email)))
-
-
-(defn get-user-session
-  [session-key])
-
-
-(defn get-user
-  [field value]
-  (case field
-    "username" (get-user-username value)
-    "email" (get-user-email value)
-    "session" (get-user-session value)))
-
-
 (defn unique-email?
   [email]
-  (if (nil? (get-user-email email))
+  (if (nil? (user-models/get-email email))
     true
     false))
 
 (defn unique-username?
   [username]
-  (if (nil? (get-user-username username))
+  (if (nil? (user-models/get-username username))
     true
     false))
 
@@ -58,22 +37,9 @@
 
 
 
-(defn activate-user
-  [params]
-  (user-models/activate-user params))
-
-
-
-(defn create-registration-request
-  [params]
-  (user-models/create-registration-request params))
-
-
 (defn register-user
   [params]
-  (let [user-account (user-models/create-user-account params)]
-    
-    ))
+  (user-models/register-user params))
 
 
 ;;Registration workflow ends
@@ -89,3 +55,40 @@
 
 (defn reset-password
   [params])
+
+
+(defn check-login
+  [params])
+
+
+(defn login [params])
+
+(defn logout [request])
+
+
+;;admin functions
+(defn validate-admin-create-user
+  [params] true)
+
+
+(defn admin-save-user
+  [params])
+
+
+(defn admin-delete-user
+  [user-account-id])
+
+
+(defn get-all-users
+  [params])
+
+(defn search-user
+  [q])
+
+
+(defn get-user
+  [user-account-id])
+
+
+(defn user-status
+  [request])

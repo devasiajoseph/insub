@@ -2,7 +2,7 @@
    (:use compojure.core)
    (:require [liberator.core :refer [resource defresource]]
              [libs.centipair.contrib.response :as response]
-             [libs.centipair.user.models :as user-models]))
+             [libs.centipair.user.models.interface :as user-models]))
 
 
 ;;(POST "/api/centipair/register" [] (user-api/api-user-register))
@@ -42,7 +42,7 @@
   :allowed-methods [:post]
   
   :post! (fn [context]
-           {:login-result (user-models/logout-user (:request context))})
+           {:login-result (user-models/logout (:request context))})
   :handle-created (fn [context] {:result "success"}))
 
 
@@ -62,7 +62,7 @@
   :post! (fn [context]
            {:created (user-models/admin-save-user (:params (:request context)))})
   :handle-created (fn [context] (:created context))
-  :delete! (fn [context]  (user-models/delete-user source))
+  :delete! (fn [context]  (user-models/admin-delete-user source))
   :delete-enacted? false
   :handle-ok (fn [context] (if (nil? source) 
                              (user-models/get-all-users (:params (:request context))) 
