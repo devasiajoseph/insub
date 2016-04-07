@@ -23,12 +23,19 @@
 
 (def confirm-password (reagent/atom {:id "confirm-password" :type "password" :label "Confirm Password" :validator password-required-match}))
 
+
+(defn registration-success-ui
+  []
+  [:div {:class "panel"} [:h4 "Registration success"]
+   [:p "Please click on the activation link in your email to activate your account."]])
+
 (defn register-submit []
   (ajax/form-post
    registration-form-state
    "/api/centipair/register"
    [username email password confirm-password]
-   (fn [response] (.log js.console "yay!!!"))))
+   (fn [response]
+     (ui/render-ui registration-success-ui "content"))))
 
 (def register-submit-button (reagent/atom {:label "Submit" :on-click register-submit :id "register-submit-button"}))
 

@@ -98,10 +98,24 @@
 ;;Registration workflow
 
 
+(defn get-email-verification
+  [activation-key]
+  (first (cql/select (dbcon) email-verification (cql/where [[:= :verification_key activation-key]]))))
+
+
+(defn commit-user-activation
+  [verification]
+  (cql/delete (dbcon) email-verification (cql/where [[:= :verification_key (:verification_key verification)]]))
+  )
+
 (defn activate-user
   [activation-key]
-  
-  )
+  (let [verification (get-email-verification activation-key)]
+    (if (nil? email-verification)
+      {:message "Invalid verification key"}
+      (commit-user-activation email-verification)
+      )
+    ))
 
 
 (defn create-user-account
@@ -135,7 +149,8 @@
   [new-account]
   (let [vr-params {:verification_key (crypto/generate-key 16)
                    :user_account_id (:user_account_id new-account)
-                   :verified false}]
+                   :created_date (time/unix-timestamp-now)
+                   }]
     (do (cql/insert (dbcon) email-verification vr-params))
     vr-params))
 

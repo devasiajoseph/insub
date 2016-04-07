@@ -11,10 +11,6 @@
 
 
 (defn activate-user
-  [key]
-  (let [activation-result (user-model/activate-user key)]
-    (if (:result activation-result)
-      "Activated"
-      "Something wrong"
-      )
-    ))
+  [activation-key]
+  (let [activation-result (user-model/activate-user activation-key)]
+    (layout/render "activate.html" activation-result)))

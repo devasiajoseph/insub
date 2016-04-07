@@ -9,7 +9,7 @@
 ** TODO create UI states for navigation bar and menu
 
 *** TODO Show login and signup if not logged in
-Show login page if not logge din 
+Show login and signup links  if not loggedin 
 
 *** TODO show default universal feed if not logged in
 
@@ -24,11 +24,12 @@ Show login page if not logge din
 
 ** DONE Integrate mail notification for registration
 
-** TODO Show registration success UI
+** DONE Show registration success UI
    DEADLINE: <2016-04-07 Thu>
 
 ** TODO Activate user via clicking mail link
    DEADLINE: <2016-04-07 Thu>
+
 
 * User login
 

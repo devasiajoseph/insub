@@ -8,7 +8,7 @@ CREATE TABLE user_log (user_account_id timeuuid PRIMARY KEY, login_time timestam
 
 CREATE TABLE user_session(session_id text PRIMARY KEY, user_account_id timeuuid, session_expire_time timestamp);
 
-CREATE TABLE email_verification(verification_key text PRIMARY KEY, user_account_id timeuuid, verified boolean);
+CREATE TABLE email_verification(verification_key text PRIMARY KEY, user_account_id timeuuid, created_date timestamp);
 
 
 
