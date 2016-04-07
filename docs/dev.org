@@ -43,9 +43,14 @@ Show login and signup links  if not loggedin
 
 ** TODO create user login cassandra functions
    DEADLINE: <2016-04-07 Thu>
-
+   
 ** TODO create logout function
    DEADLINE: <2016-04-07 Thu>
+   
+
+** TODO create user status function
+   
+** TODO create user logged in status for menus
 
 * Boxes
 
