@@ -45,4 +45,4 @@
 
 (defn generate-key
   [length]
-  (random-base64 length))
+  (random/url-part length))

@@ -7,7 +7,7 @@
 
 (defroutes centipair-urls
   ;;(GET "/dashboard" [] (c-views/dashboard))
-  (GET "/user/activate/:key" [key] (user-routes/activate-user key))
+  (GET "/user/activate" request (user-routes/activate-user request))
   (GET "/logout" request (user-routes/logout request))
   ;;(ANY "/api/centipair/admin/user" [] (user-api/admin-api-user))
   ;;(ANY "/api/centipair/admin/user/search" [] (user-api/admin-api-user-search))

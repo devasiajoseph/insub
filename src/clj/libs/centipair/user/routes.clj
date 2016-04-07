@@ -11,6 +11,7 @@
 
 
 (defn activate-user
-  [activation-key]
-  (let [activation-result (user-model/activate-user activation-key)]
+  [request]
+  (let [activation-result (user-model/activate-user (get-in request [:params :key]))]
     (layout/render "activate.html" activation-result)))
+

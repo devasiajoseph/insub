@@ -12,7 +12,7 @@
 Show login and signup links  if not loggedin 
 
 *** TODO show default universal feed if not logged in
-
+    
 
 * User registration
 
@@ -27,9 +27,15 @@ Show login and signup links  if not loggedin
 ** DONE Show registration success UI
    DEADLINE: <2016-04-07 Thu>
 
-** TODO Activate user via clicking mail link
+** DONE Activate user via clicking mail link
    DEADLINE: <2016-04-07 Thu>
 
+
+** DONE Fix key slash bug in activation link
+   Example : Somteimes key looks like this "GkWreW2iq/GKa+HMF18b0g== " which has a slash in it. This will produce 404 error since slash is recognized as a link route
+   Possible Solution: Try sending this key as a query parameter
+   Start: <2016-04-07 Thu 19:43>
+   End: <2016-04-07 Thu 19:58>
 
 * User login
 
@@ -41,13 +47,12 @@ Show login and signup links  if not loggedin
 ** TODO create logout function
    DEADLINE: <2016-04-07 Thu>
 
-* User boxes
+* Boxes
 
 ** TODO Create box
 
 *** Fields
 
 **** Box name
-
 **** Box description
 

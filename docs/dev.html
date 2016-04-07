@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="title" content="dev"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2016-04-06T20:23+0530"/>
+<meta name="generated" content="2016-04-07T16:32+0530"/>
 <meta name="author" content="devasia"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -142,6 +142,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-4">2.4 Integrate mail notification for registration</a></li>
 <li><a href="#sec-2-5">2.5 Show registration success UI</a></li>
 <li><a href="#sec-2-6">2.6 Activate user via clicking mail link</a></li>
+<li><a href="#sec-2-7">2.7 Fix key slash bug in activation link</a></li>
 </ul>
 </li>
 <li><a href="#sec-3">3 User login</a>
@@ -202,7 +203,7 @@ for the JavaScript code in this tag.
 <h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> <span class="todo TODO">TODO</span> Show login and signup if not logged in</h4>
 <div class="outline-text-4" id="text-1-3-1">
 
-<p>Show login page if not logge din 
+<p>Show login and signup links  if not loggedin 
 </p>
 </div>
 
@@ -265,7 +266,7 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="section-number-3">2.5</span> <span class="todo TODO">TODO</span> Show registration success UI</h3>
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> <span class="done DONE">DONE</span> Show registration success UI</h3>
 <div class="outline-text-3" id="text-2-5">
 
 <p>    <span class="timestamp-wrapper"><span class="timestamp-kwd">DEADLINE: </span> <span class="timestamp">2016-04-07 Thu</span></span><br/>
@@ -275,10 +276,22 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-2-6" class="outline-3">
-<h3 id="sec-2-6"><span class="section-number-3">2.6</span> <span class="todo TODO">TODO</span> Activate user via clicking mail link</h3>
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> <span class="done DONE">DONE</span> Activate user via clicking mail link</h3>
 <div class="outline-text-3" id="text-2-6">
 
 <p>    <span class="timestamp-wrapper"><span class="timestamp-kwd">DEADLINE: </span> <span class="timestamp">2016-04-07 Thu</span></span><br/>
+</p>
+
+</div>
+
+</div>
+
+<div id="outline-container-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> <span class="todo TODO">TODO</span> Fix key slash bug in activation link</h3>
+<div class="outline-text-3" id="text-2-7">
+
+<p>   Example : Somteimes key looks like this "GkWreW2iq/GKa+HMF18b0g== " which has a slash in it. This will produce 404 error since slash is recognized as a link route
+   Possible Solution: Try sending this key as a query parameter
 </p>
 </div>
 </div>
@@ -361,7 +374,7 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2016-04-06T20:23+0530</p>
+<p class="date">Date: 2016-04-07T16:32+0530</p>
 <p class="author">Author: devasia</p>
 <p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

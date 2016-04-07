@@ -105,17 +105,17 @@
 
 (defn commit-user-activation
   [verification]
-  (cql/delete (dbcon) email-verification (cql/where [[:= :verification_key (:verification_key verification)]]))
-  )
+  (do 
+    (cql/delete (dbcon) email-verification (cql/where [[:= :verification_key (:verification_key verification)]]))
+    (cql/update (dbcon) user-account {:email_verified true :active  true} (cql/where [[:= :user_account_id (:user_account_id verification)]])))
+  {:message "Your account has been activated"})
 
 (defn activate-user
   [activation-key]
   (let [verification (get-email-verification activation-key)]
-    (if (nil? email-verification)
+    (if (nil? verification)
       {:message "Invalid verification key"}
-      (commit-user-activation email-verification)
-      )
-    ))
+      (commit-user-activation verification))))
 
 
 (defn create-user-account
