@@ -22,11 +22,11 @@
   :available-media-types ["application/json"]
   :allowed-methods [:post]
   :processable? (fn [context]
-                  (user-models/check-login (:params (:request context))))
+                  (user-models/valid-login? (:params (:request context))))
   :handle-unprocessable-entity (fn [context]
                                  (:validation-result context))
   :post! (fn [context]
-           {:login-result (user-models/login (:params (:request context)))})
+           {:login-result (user-models/login (:user context))})
   :handle-created (fn [context]
                     (response/liberator-json-response-cookies 
                      (:login-result context)

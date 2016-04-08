@@ -7,6 +7,7 @@
             [libs.centipair.async.channels :as channels]
             [libs.centipair.contrib.cookies :as cookies]
             [clojure.tools.logging :as log]
+            [libs.centipair.utilities.errors :as errors]
             ))
 
 
@@ -172,9 +173,32 @@
 
 ;;Registration workflow ends
 
+(defn valid-login?
+  [params]
+  (let [user (or (get-user-username (:username params)) (get-user-email (:username params)))]
+    (if (nil? user)
+      (errors/validation-error :username "This user account does not exist")
+      (if (crypto/check-password (:password params) (:password user))
+        [true {:user user}]
+        (errors/validation-error :username "Password is incorrect")))))
 
-(defn login-user
-  [params])
+
+(defn create-user-session
+  [user]
+  )
+
+(defn login
+  [user]
+  (let [auth-token (crypto/generate-key 48)
+        user-session-obj {:auth_token auth-token
+                          :user_account_id (:user_account_id user)}]
+    (do
+      (cql/insert (dbcon) user-session user-session-obj)
+      (cql/insert (dbcon) user-session-index user-session-obj))
+    {:auth-token auth-token
+     :first-name (:first_name user)
+     :middle-name (:middle_name user)
+     :last_name (:last_name user)}))
 
 
 (defn forget-password

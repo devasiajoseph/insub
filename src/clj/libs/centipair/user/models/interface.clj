@@ -50,8 +50,9 @@
 ;;Registration workflow ends
 
 
-(defn login-user
-  [params])
+(defn valid-login?
+  [params]
+  (user-models/valid-login? params))
 
 
 (defn forget-password
@@ -62,11 +63,10 @@
   [params])
 
 
-(defn check-login
-  [params])
 
-
-(defn login [params])
+(defn login
+  [user]
+  (user-models/login user))
 
 (defn logout [request])
 
