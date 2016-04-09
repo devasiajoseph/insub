@@ -41,7 +41,7 @@ Show login and signup links  if not loggedin
 
 ** DONE Create UI for login page
 
-** TODO create user login cassandra functions
+** DONE create user login cassandra functions
    DEADLINE: <2016-04-07 Thu>
    
 ** TODO create logout function
@@ -51,6 +51,9 @@ Show login and signup links  if not loggedin
 ** TODO create user status function
    
 ** TODO create user logged in status for menus
+
+
+** DONE Create UI for after logged in state
 
 * Boxes
 

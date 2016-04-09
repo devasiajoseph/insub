@@ -22,7 +22,7 @@
   :available-media-types ["application/json"]
   :allowed-methods [:post]
   :processable? (fn [context]
-                  (user-models/valid-login? (:params (:request context))))
+                  (user-models/validate-login (:params (:request context))))
   :handle-unprocessable-entity (fn [context]
                                  (:validation-result context))
   :post! (fn [context]

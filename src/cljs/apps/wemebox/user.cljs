@@ -5,7 +5,9 @@
             [libs.centipair.ui :as ui]
             [libs.centipair.components.notifier :as notifier]
             [libs.centipair.utilities.ajax :as ajax]
-            [reagent.core :as reagent]))
+            [libs.centipair.utilities.spa :as spa]
+            [reagent.core :as reagent]
+            ))
 
 
 (def registration-form-state (reagent/atom {:title "Sign Up" :action "/register-submit" :id "registration-form"}))
@@ -55,7 +57,7 @@
 
 
 
-(def login-email (reagent/atom {:id "email" :type "email" :label "Email/Username" :validator v/email-required} ))
+(def login-email (reagent/atom {:id "username" :type "text" :label "Email/Username" :validator v/required} ))
 (def login-password (reagent/atom {:id "password" :type "password" :label "Password" :validator v/required}))
 (def login-form-state (reagent/atom {:title "Login" :action "/login-submit" :id "login-form"}))
 
@@ -66,7 +68,8 @@
    "/api/centipair/login"
    [login-email login-password]
    (fn [response] 
-     (.replace js/window.location (:redirect response)))))
+     (spa/go-home)
+     )))
 
 (def login-submit-button (reagent/atom {:label "Submit" :on-click login-submit :id "login-submit-button"}))
 

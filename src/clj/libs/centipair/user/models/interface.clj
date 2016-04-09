@@ -36,6 +36,21 @@
       [false {:validation-result {:errors validation-result}}])))
 
 
+(def login-validator
+  (validation-set
+   (presence-of :username :message "Please enter your username or email")
+   (presence-of :password :message "Please enter your password")))
+
+
+(defn validate-login
+  [params]
+  (println params)
+  (let [validation-result (login-validator params)]
+    (if (valid? validation-result)
+      (user-models/valid-login? params)
+      [false {:validation-result {:errors validation-result}}])))
+
+
 
 (defn register-user
   [params]
@@ -49,10 +64,6 @@
 
 ;;Registration workflow ends
 
-
-(defn valid-login?
-  [params]
-  (user-models/valid-login? params))
 
 
 (defn forget-password

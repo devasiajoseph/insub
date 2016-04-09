@@ -180,7 +180,7 @@
       (errors/validation-error :username "This user account does not exist")
       (if (crypto/check-password (:password params) (:password user))
         [true {:user user}]
-        (errors/validation-error :username "Password is incorrect")))))
+        (errors/validation-error :password "Password is incorrect")))))
 
 
 (defn create-user-session

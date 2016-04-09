@@ -14,3 +14,7 @@
   (set! (.-hash js/window.location) 
         (str hash-url)))
 
+
+(defn go-home
+  []
+  (redirect "/"))
