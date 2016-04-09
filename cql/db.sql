@@ -5,19 +5,18 @@ CREATE TABLE user_account (
        user_account_id timeuuid PRIMARY KEY,
        username text,
        password text, email text,
-       first_name text,
-       middle_name text,
-       last_name text,
+       real_name text,
        active boolean,
        created_date timestamp,
        email_verified boolean,
-       profile_verified boolean);
+       profile_verified boolean,
+       use_real_name boolean);
 CREATE TABLE user_username (username text PRIMARY KEY, user_account_id timeuuid);
 CREATE TABLE user_email (email text PRIMARY KEY, user_account_id timeuuid);
 CREATE TABLE user_log (user_account_id timeuuid PRIMARY KEY, login_time timestamp, ip text, os text, browser text);
 
 CREATE TABLE user_session(auth_token text PRIMARY KEY, user_account_id timeuuid, session_expire_time timestamp);
-CREATE TABLE user_session_index(user_account_id timeuuid PRIMARY KEY, auth_token text);
+CREATE TABLE user_session_index(user_account_id timeuuid, auth_token text, session_expire_time timestamp, PRIMARY KEY (user_account_id, auth_token));
 
 CREATE TABLE email_verification(verification_key text PRIMARY KEY, user_account_id timeuuid, created_date timestamp);
 

@@ -7,11 +7,12 @@
             [libs.centipair.utilities.ajax :as ajax]
             [libs.centipair.utilities.spa :as spa]
             [reagent.core :as reagent]
+            [libs.centipair.dashboard.channels :as d-chan]
             ))
 
 
 (def registration-form-state (reagent/atom {:title "Sign Up" :action "/register-submit" :id "registration-form"}))
-(def username (reagent/atom {:id "username" :type "text" :label "Username" :validator v/required } ))
+(def username (reagent/atom {:id "username" :type "text" :label "Username/Nickname" :validator v/required } ))
 (def email (reagent/atom {:id "email" :type "email" :label "Email" :validator v/email-required} ))
 (def password (reagent/atom {:id "password" :type "password" :label "Password" :validator v/required}))
 (def accept-box-terms (reagent/atom {:id "box-terms" :type "checkbox" :label "Terms & Conditions" :validator v/agree-terms :description "I've read and accept terms & conditions"}))
@@ -68,8 +69,9 @@
    "/api/centipair/login"
    [login-email login-password]
    (fn [response] 
-     (spa/go-home)
-     )))
+     (do 
+       (reset! d-chan/auth response)
+       (spa/go-home)))))
 
 (def login-submit-button (reagent/atom {:label "Submit" :on-click login-submit :id "login-submit-button"}))
 

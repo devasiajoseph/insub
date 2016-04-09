@@ -44,7 +44,6 @@
 
 (defn validate-login
   [params]
-  (println params)
   (let [validation-result (login-validator params)]
     (if (valid? validation-result)
       (user-models/valid-login? params)
@@ -107,4 +106,5 @@
 
 
 (defn user-status
-  [request])
+  [request]
+  (user-models/user-status))

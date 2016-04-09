@@ -4,7 +4,7 @@
 
 ** DONE Create main style
 
-** Create 
+** TODO Create home page
 
 ** TODO create UI states for navigation bar and menu
 
@@ -14,7 +14,7 @@ Show login and signup links  if not loggedin
 *** TODO show default universal feed if not logged in
     
 
-* User registration
+* TODO User registration
 
 ** DONE Create cassandra user model functions
 
@@ -30,12 +30,12 @@ Show login and signup links  if not loggedin
 ** DONE Activate user via clicking mail link
    DEADLINE: <2016-04-07 Thu>
 
-
 ** DONE Fix key slash bug in activation link
    Example : Somteimes key looks like this "GkWreW2iq/GKa+HMF18b0g== " which has a slash in it. This will produce 404 error since slash is recognized as a link route
    Possible Solution: Try sending this key as a query parameter
    Start: <2016-04-07 Thu 19:43>
    End: <2016-04-07 Thu 19:58>
+
 
 * User login
 
@@ -55,6 +55,9 @@ Show login and signup links  if not loggedin
 
 ** DONE Create UI for after logged in state
 
+** DONE Fix session expire time bug <2016-04-09 Sat 12:11> <2016-04-09 Sat 12:31>
+   Session expire time is missing from table
+
 * Boxes
 
 ** TODO Create box
@@ -63,4 +66,8 @@ Show login and signup links  if not loggedin
 
 **** Box name
 **** Box description
+
+* User
+
+** Use single real_name field instead of first_name last_name etc
 

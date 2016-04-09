@@ -171,6 +171,15 @@
                                               :registration_key (:verification_key vr-params)}})))))
 
 
+(defn user-ident
+  "If user details not provided generate anonymous user"
+  [user]
+  (if (:use_real_name user)
+    (if (nil? (:real_name user))
+      (:username user)
+      (:real_name user))
+    (:username user)))
+
 ;;Registration workflow ends
 
 (defn valid-login?
@@ -183,22 +192,19 @@
         (errors/validation-error :password "Password is incorrect")))))
 
 
-(defn create-user-session
-  [user]
-  )
 
 (defn login
   [user]
   (let [auth-token (crypto/generate-key 48)
         user-session-obj {:auth_token auth-token
-                          :user_account_id (:user_account_id user)}]
+                          :user_account_id (:user_account_id user)
+                          :session_expire_time (time/set-time-expiry 48)}]
     (do
       (cql/insert (dbcon) user-session user-session-obj)
       (cql/insert (dbcon) user-session-index user-session-obj))
     {:auth-token auth-token
-     :first-name (:first_name user)
-     :middle-name (:middle_name user)
-     :last_name (:last_name user)}))
+     :user-ident (user-ident user)
+     :logged-in true}))
 
 
 (defn forget-password
@@ -220,3 +226,9 @@
         (cql/delete (dbcon) user-username (cql/where [[= :username (:username uac)]]))
         (cql/delete (dbcon) user-account (cql/where [[= :user_account_id (:user_account_id uac)]]))))
     uac))
+
+
+(defn user-status
+  [request]
+  
+  )
